@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Static Resource</title>
+    <script src="{{url_for('static', filename='js/05.hello.js')}}"></script>
+</head>
+<body style="margin: 40px;">
+    <h2>Static Resource</h2>
+    {# {{}} : 함수 넣을 때 / url_for(''의 위치, filename=) jinja에서만 쓸 수 있음 절대 path를 사용
+    안하기 위한 방법 #}
+    <hr>
+    <img src="{{url_for('static', filename='img/cat.jpg', q=mtime)}}" height="400">
+    <h4>{{mtime}}</h4>
+    {# q(query) 에 기억된 mtime을 이용하여 파일이 바뀌면 화면에 바뀐 img가 뜰 수 있게 함. #}
+    <h4>{{url_for('static', filename='img/cat.jpg', q=mtime)}}</h4>
+    <hr>
+    <button onclick="sayHello()">Say Hello</button>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scatter graph의 값 입력</title>
+</head>
+<body style="margin: 40px;">
+    <h2>Normal 분포와 Uniform 분포의 값 입력</h2>
+    <hr>
+    <form action="/scatter" method="post">
+        <h3>Normal 분포 입력값</h3>
+        평균&nbsp;<input type="text" name="mean_"><br>
+        표준편차&nbsp;<input type="text" name="std_" ><br>
+        갯수&nbsp;<input type="text" name="num_">
+        <hr>
+        <h3>Uniform 분포 입력값</h3>
+        Min&nbsp;<input type="text" name="min_"><br>
+        Max&nbsp;<input type="text" name="max_"><br>
+        <input type="submit" value="제출">
+    </form>
+    
+</body>
+</html>
