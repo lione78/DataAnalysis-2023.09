@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>무신사 베스트</title>
+</head>
+<body style="margin: 40px;">
+    <h2>무신사 베스트</h2>
+    <hr>
+    {# {'브랜드' : brand, '링크': link, '이미지':img, '이름':name, 
+    '가격':price, '비회원가격':no_member_price, '멤버가격':member_dict} #}
+    <table border="1">
+        <tr>
+            <th>브랜드</th>
+            <th>이미지</th>
+            <th>이름</th>
+            <th>가격</th>
+            <th>비회원가격</th>
+            <th>멤버가격</th>
+        </tr>
+        {% for item in item_list %}
+            <tr>
+                <td>{{item.브랜드}}</td>
+                <td><a href="{{item.링크}}" target="_blank"><img src="{{item.이미지}}" height="40px"></a></td>
+                <td>{{item.이름}}</td>
+                <td>{{item.가격}}</td>
+                <td>{{item.비회원가격}}</td>
+                <td>
+                    {{item.멤버가격}}
+                    {# <select name="member_price">
+                        {% for key, val in item.멤버가격.items() %}
+                        <option value="{{key}} {{val}}">{{key}} {{val}}</option>
+                        {% endfor %}
+                    </select> #}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
