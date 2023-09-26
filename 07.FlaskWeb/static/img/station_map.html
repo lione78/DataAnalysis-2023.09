@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_eff337dc3c6465f00c5026c36507369c {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_eff337dc3c6465f00c5026c36507369c" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_eff337dc3c6465f00c5026c36507369c = L.map(
+                "map_eff337dc3c6465f00c5026c36507369c",
+                {
+                    center: [37.50547092328509, 126.91297069586122],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 14,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_017e804737cf1cc65e04117c92d9fc8d = L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "Data by \u0026copy; \u003ca target=\"_blank\" href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca target=\"_blank\" href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_eff337dc3c6465f00c5026c36507369c);
+        
+    
+            var marker_cf0a9c2e8ba5aa4724c926be4e82f696 = L.marker(
+                [37.4990627621518, 126.908792674047],
+                {}
+            ).addTo(map_eff337dc3c6465f00c5026c36507369c);
+        
+    
+        var popup_74117fec5e41834ff398e5651a00d16b = L.popup({"maxWidth": 200});
+
+        
+            
+                var html_d8aa3a3b5a46d0f8bbd1482428cc6dff = $(`<div id="html_d8aa3a3b5a46d0f8bbd1482428cc6dff" style="width: 100.0%; height: 100.0%;">서울특별시 영등포구 신길로 74 (신길동)</div>`)[0];
+                popup_74117fec5e41834ff398e5651a00d16b.setContent(html_d8aa3a3b5a46d0f8bbd1482428cc6dff);
+            
+        
+
+        marker_cf0a9c2e8ba5aa4724c926be4e82f696.bindPopup(popup_74117fec5e41834ff398e5651a00d16b)
+        ;
+
+        
+    
+    
+            marker_cf0a9c2e8ba5aa4724c926be4e82f696.bindTooltip(
+                `<div>
+                     신길주유소
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_7e6f704cecb5d26f687aaf0477929edd = L.marker(
+                [37.5037333122657, 126.902813303561],
+                {}
+            ).addTo(map_eff337dc3c6465f00c5026c36507369c);
+        
+    
+        var popup_01d441a92b9623e48d6d6280e5f69c12 = L.popup({"maxWidth": 200});
+
+        
+            
+                var html_dc8a54095d4d0aa8d015b8d3b767e934 = $(`<div id="html_dc8a54095d4d0aa8d015b8d3b767e934" style="width: 100.0%; height: 100.0%;">서울특별시 영등포구 가마산로 414 (신길동)</div>`)[0];
+                popup_01d441a92b9623e48d6d6280e5f69c12.setContent(html_dc8a54095d4d0aa8d015b8d3b767e934);
+            
+        
+
+        marker_7e6f704cecb5d26f687aaf0477929edd.bindPopup(popup_01d441a92b9623e48d6d6280e5f69c12)
+        ;
+
+        
+    
+    
+            marker_7e6f704cecb5d26f687aaf0477929edd.bindTooltip(
+                `<div>
+                     성락주유소
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_96c5fcbb1d686edac2a43e81548f34c8 = L.marker(
+                [37.4983819172602, 126.919783311181],
+                {}
+            ).addTo(map_eff337dc3c6465f00c5026c36507369c);
+        
+    
+        var popup_8f05bc3bb0438b86be4b91f9f25d56e8 = L.popup({"maxWidth": 200});
+
+        
+            
+                var html_3b9dadee893aeb3ed57ebfb2a66f0879 = $(`<div id="html_3b9dadee893aeb3ed57ebfb2a66f0879" style="width: 100.0%; height: 100.0%;">서울특별시 영등포구 여의대방로23길 2 (신길동)</div>`)[0];
+                popup_8f05bc3bb0438b86be4b91f9f25d56e8.setContent(html_3b9dadee893aeb3ed57ebfb2a66f0879);
+            
+        
+
+        marker_96c5fcbb1d686edac2a43e81548f34c8.bindPopup(popup_8f05bc3bb0438b86be4b91f9f25d56e8)
+        ;
+
+        
+    
+    
+            marker_96c5fcbb1d686edac2a43e81548f34c8.bindTooltip(
+                `<div>
+                     경덕주유소
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_96e32428b14f50069709f9c03e5d934f = L.marker(
+                [37.508496518797, 126.905985305925],
+                {}
+            ).addTo(map_eff337dc3c6465f00c5026c36507369c);
+        
+    
+        var popup_0e748544981c1a13188923c21d19c4ad = L.popup({"maxWidth": 200});
+
+        
+            
+                var html_dfea9d29f97f9296285aeb25257fc23d = $(`<div id="html_dfea9d29f97f9296285aeb25257fc23d" style="width: 100.0%; height: 100.0%;">서울특별시 영등포구 도신로 130 (신길동)</div>`)[0];
+                popup_0e748544981c1a13188923c21d19c4ad.setContent(html_dfea9d29f97f9296285aeb25257fc23d);
+            
+        
+
+        marker_96e32428b14f50069709f9c03e5d934f.bindPopup(popup_0e748544981c1a13188923c21d19c4ad)
+        ;
+
+        
+    
+    
+            marker_96e32428b14f50069709f9c03e5d934f.bindTooltip(
+                `<div>
+                     행촌주유소
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_c0b30fc8db1df86921b5cb8cd055d3d8 = L.marker(
+                [37.5176801059507, 126.927478884592],
+                {}
+            ).addTo(map_eff337dc3c6465f00c5026c36507369c);
+        
+    
+        var popup_5e72bfdb5e5b4d6a2488e65ea23d953f = L.popup({"maxWidth": 200});
+
+        
+            
+                var html_c627d118f3cf01db6454720c6a7165cf = $(`<div id="html_c627d118f3cf01db6454720c6a7165cf" style="width: 100.0%; height: 100.0%;">서울특별시 영등포구 의사당대로 154 (여의도동)</div>`)[0];
+                popup_5e72bfdb5e5b4d6a2488e65ea23d953f.setContent(html_c627d118f3cf01db6454720c6a7165cf);
+            
+        
+
+        marker_c0b30fc8db1df86921b5cb8cd055d3d8.bindPopup(popup_5e72bfdb5e5b4d6a2488e65ea23d953f)
+        ;
+
+        
+    
+    
+            marker_c0b30fc8db1df86921b5cb8cd055d3d8.bindTooltip(
+                `<div>
+                     여의도주유소
+                 </div>`,
+                {"sticky": true}
+            );
+        
+</script>
+</html>

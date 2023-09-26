@@ -1,13 +1,17 @@
-{% extends "10.bootstrap.html" %}
-{% block title %}인터파크 베스트셀러{% endblock %}
-{% block subtitle %}인터파크 베스트셀러{% endblock %}
-{% block additional_head %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>인터파크 베스트셀러</title>
     <style>
-        th { text-align: center; }
+        th, td {padding: 2px;}
     </style>
-{% endblock %}
-{% block content %}
-    <table class="table">
+</head>
+<body style="margin: 40px;">
+    <h3>인터파크 베스트셀러</h3>
+    <hr>
+    <table border="1">
         <tr>
             <th>순위</th>
             <th>제목</th>
@@ -29,4 +33,5 @@
             </tr>
         {% endfor %}
     </table>
-{% endblock %}
+</body>
+</html>

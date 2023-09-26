@@ -50,7 +50,7 @@ def get_melonchart():
         
     return data
 
-def get_restaurant_list(rest_name):
+def get_restaurant_list_more(rest_name):
     base_url = 'https://www.siksinhot.com/search'
     url = f'{base_url}?keywords={quote(rest_name)}'
     # res = requests.get(url)
@@ -84,45 +84,62 @@ def get_restaurant_list(rest_name):
 
     return data
 
+def get_restaurant_list(place):
+    base_url = 'https://www.siksinhot.com/search'
+    url = f'{base_url}?keywords={quote(place)}'
+    res = requests.get(url)
+    soup = BeautifulSoup(res.text, 'html.parser')
+    lis = soup.select('.localFood_list > li')
+    data = []
+    for li in lis:
+        atag = li.select_one('figcaption > a')
+        name = atag.select_one('h2').get_text().strip()
+        score = atag.select_one('.score').get_text().strip()
+        menu = li.select('.cate > a')[-1].get_text().strip()
+        sub_href = atag['href']
+        sub_res = requests.get(sub_href)
+        sub_soup = BeautifulSoup(sub_res.text, 'html.parser')
+        info = sub_soup.select('.pc_only > td')
+        addr = info[0].select_one('div').get_text().split('지번')[0].strip()
+        tel = info[1].select_one('div').get_text().strip()
+        data.append({'업소명':name, '평점':score, '메뉴':menu, '주소':addr, '전화번호':tel})
+    return data
+
 def get_item_list():
     url = 'https://www.musinsa.com/ranking/best'
-    # res = requests.get(url)
     driver = webdriver.Chrome()
     driver.get(url)
     time.sleep(2)
+    driver.fullscreen_window()
     body = driver.find_element(By.TAG_NAME, 'body')
-    body.send_keys(Keys.PAGE_DOWN)
-    time.sleep(2)
-    body.send_keys(Keys.PAGE_DOWN)
-    time.sleep(2)
-    soup = BeautifulSoup(driver.page_source, 'html.parser')
-    lis = soup.select('.snap-article-list > .li_box')
+    for _ in range(10):
+        body.send_keys(Keys.PAGE_DOWN)
+        time.sleep(2)
     memberships = driver.find_elements(By.CSS_SELECTOR, '.li_inner > .article_info > .membership')
     time.sleep(2)
-    for member in memberships:
+    data = []
+    for index, member in enumerate(memberships):
         member.click()
         time.sleep(1)
-    data = []
-    time.sleep(3)
-    for li in lis:
-        brand = li.select_one('.item_title').get_text().strip()
+        soup = BeautifulSoup(driver.page_source, 'html.parser')
+        lis = soup.select('.snap-article-list > .li_box')
+        li = lis[index]
+        ps = li.select('.item_title')
+        brand = ps[-1].get_text().strip()
         link = li.select_one('.list_img > a')['href']
         img = li.select_one('div.list_img > a > img')['src']
         name = li.select_one('.article_info > .list_info > a').get_text().strip()
         price = int(li.select_one('.article_info > .price').get_text().strip().replace(',', '').replace('원', '').split('\n')[0])
         no_member_price = int(li.select_one('.member_price > ul > li > .txt_price_member').get_text().strip().replace(',', '').replace('원', ''))
-        # member_price_lis = li.select('.article_info > .member_price > ul > li')[1]
-        driver.find_elements(By.CSS_SELECTOR, '.membership')
-        member_price_lis = li.select('#sPrice_2545799 > ul:nth-child(2) > li')
-        # div.li_inner > div.article_info > p.membership
-        #sPrice_2545799 > ul:nth-child(3)
-        # member_dict = {}
-        # for member_li in member_price_lis:
-        #     membership_name = member_li.get_text().strip().split()[0]
-        #     membership_price = int(member_li.get_text().strip().split()[1].replace(',', '').replace('원',''))
-        #     member_dict[membership_name] = membership_price
-        data.append({'브랜드' : brand, '링크': link, '이미지':img, '이름':name, '가격':price, '비회원가격':no_member_price, '멤버가격':member_price_lis})
-    time.sleep(10)
+        member_price_lis = li.select('.article_info > .member_price > ul > li')[1:10]
+        member_dict = {}
+        for member_li in member_price_lis:
+            membership_name = member_li.get_text().strip(member_li.select_one('.txt_price_member').get_text().strip())
+            membership_price = int(member_li.select_one('.txt_price_member').get_text().strip().replace(',', '').replace('원',''))
+            member_dict[membership_name] = membership_price
+        data.append({'브랜드' : brand, '링크': link, '이미지':img, '이름':name, '가격':f'{price:,d}', '비회원가격':f'{no_member_price:,d}', '멤버가격':member_dict})
+        member.click()
+
     return data
         
 
