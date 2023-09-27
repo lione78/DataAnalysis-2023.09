@@ -5,7 +5,7 @@ app = Flask(__name__)       # Flask의 __main__을 사용
 
 @app.route('/')         # localhost:5000/ 을 서비스하기 위한 코드 http://127.0.0.1:5000 (/)<-의미
 def index():            # def 이름은 의미가 없음.
-    return '<h1>Hello Flask</h1><h2>Flask 좋아요!!!</h2>'       #ajax, json으로 데이터 보낼 때.
+    return render_template('home.html')       #ajax, json으로 데이터 보낼 때.
 
 @app.route('/hello')
 def hello():
