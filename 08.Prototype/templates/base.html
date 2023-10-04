@@ -47,7 +47,7 @@
                     </ul>
                 </li>
                 <li class="nav-item ms-3">
-                    <a class="nav-link {% if menu.sc %}active{% endif %}" href="{% if menu.sc %}#{% else %}/schedule{% endif %}"><i class="fa-solid fa-calendar-days"></i> 스케쥴</a>
+                    <a class="nav-link {% if menu.sc %}active{% endif %}" href="{% if menu.sc %}#{% else %}/schedule/calendar/this{% endif %}"><i class="fa-solid fa-calendar-days"></i> 스케쥴</a>
                 </li>
                 <li class="nav-item ms-3">
                     {% if session['uid'] %}
@@ -69,7 +69,7 @@
         <div class="row">
             <div class="col-3">
                 <a href="javascript:changeProfile()">
-                    <img id="profile" src="{{url_for('static', filename='data/profile.jpg')}}" class="rounded-circle" width="90%">
+                    <img id="profile" src="{{url_for('static', filename='data/profile.png')}}" class="rounded-circle" width="90%">
                     <!-- <img src="https://picsum.photos/256/256" class="rounded-circle" width="90%"> -->
                 </a>
                 <div id="imageInput" class="mt-2 d-none">
@@ -88,18 +88,18 @@
                     <img src="{{url_for('static', filename='data/github.png')}}" height="16" class="me-2"><a href="#">lione78</a><br>
                     <img src="{{url_for('static', filename='data/facebook.png')}}" height="16" class="me-2"><a href="#">lione78</a><br>
                     <a href="#" onclick="changeAddr(); return false;">
-                        <img src="{{url_for('static', filename='data/addr.png')}}" height="16" class="me-2">
+                        <img src="{{url_for('static', filename='data/addr.png')}}" height="16">
                     </a>
                         <span id="addr">{{ session['addr'] }}</span>
                         <a href="javascript:changeWeather()"><span class="badge bg-secondary">날씨</span></a>
-                    <div id="addrInput" class="mt-2 d-none"> <!--d-none : display none 없어짐-->
+                    <div id="addrInput" class="mt-2 d-none">
                         <input type="text" id="addrInputTag" class="form-control form-control-sm"
-                            onkeyup="if(window.event.keyCode==13) {addrSubmit()}"> <!-- 폰트 작게 -->
+                            onkeyup="if(window.event.keyCode==13) {addrSubmit()}">
                         <a href="javascript:addrSubmit()">
                             <span class="badge bg-primary">확인</span>
                         </a>
                     </div>
-                    <div id="weather"></div> <!--ajax.js에서 success시 받음-->
+                    <div id="weather"></div>
                     <button class="btn btn-sm btn-outline-primary mt-3">Edit Profile</button>
                 </div>
             </div>
@@ -119,11 +119,11 @@
         </div>
     </nav>
     {% with messages = get_flashed_messages() %}
-        {%if messages %}
-            <script type="text/javascript">
+        {% if messages %}
+            <script>
                 alert("{{messages[-1]}}");
             </script>
-        {%endif%}
+        {% endif %}
     {% endwith %}
     {% block additional_body %}{% endblock %}
 </body>
