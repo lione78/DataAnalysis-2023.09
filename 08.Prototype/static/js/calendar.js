@@ -3,12 +3,12 @@
  * 		calendar.html 에서 사용하였던 자바스크립트 코드
  */
 
-var schedClicked = false;
-var annivClicked = false;
+var schedClicked = false;		// 동작을 구분만 해주기 위하여 설정
+var annivClicked = false;		// anniv, sched가 있는 날짜에 칸만 클릭하기 위하여 설정
  
 function cellClick(date) {
-	if (schedClicked)
-		schedClicked = false;
+	if (schedClicked)			// sched가 있는 곳에 클릭되면 false로 바꾸고 그냥 빠져 나옴.
+		schedClicked = false;	// schedClick(sid)와 같이 눌리면 우선권을 schedClick에 주기 위하여
 	else if (annivClicked)
 		annivClicked = false;
 	else {
