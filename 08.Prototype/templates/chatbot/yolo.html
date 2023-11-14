@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% block title %}객체 검출{% endblock %}
+{% block additional_head %}
+    <script>
+        function option() {
+            $('#optionModal').modal('show');    // modal('hide') : 닫힘
+        }
+
+        function send() {
+            $('#yoloimg').attr({src: "{{url_for('static', filename='img/please_wait.gif')}}", width:498});
+            let color = $("input[name='color']:checked").val();     // input의 name이 color인 check된 value를 가져옴
+            let linewidth = $('#linewidth').val();
+            let fontsize = $('#fontsize').val();
+            let imagefile = $('#yoloimage')[0].files[0]; // image file 가져옴
+            // formData로 묶어서 한꺼번에 server로 보내줌
+            let formData = new FormData();
+            // name이 color인 놈을 color로 보내줌
+            formData.append('color', color);
+            formData.append('linewidth', linewidth);
+            formData.append('fontsize', fontsize);
+            formData.append('image', imagefile);
+            // js는 object로 key를 "" str 처리 안해줘도 됨
+            $.ajax({
+                type: 'POST',
+                url: '/chatbot/yolo',
+                data: formData,
+                enctype: 'multipart/form-data',
+                processData: false,
+                contentType: false,         // file을 전송할 경우 사용, image 전송시 false
+                success: function(result) {  // 성공시 result 값을 다시 받음
+                    let mtime = JSON.parse(result);
+                    // url 바꾸기 위하여 '?q=' + mtime 사용
+                    let url = "{{url_for('static', filename='result/yolo.png')}}" + '?q=' + mtime;
+                    $('#yoloimg').attr({src: url, width: '100%'});
+                },
+                error: function(){
+                    console.log("error");
+                }
+            });
+        }
+    </script>
+{% endblock %}
+{% block subtitle %}객체 검출 - 공공 인공지능 API{% endblock %}
+{% block content %}
+    <!-- <form action="/chatbot/yolo" method="post" enctype="multipart/form-data"> -->
+        <table class="table table-borderless">
+            <tr>
+                <td style="width: 15%;"><label class="col-form-label">검출할 파일</label></td>
+                <td style="width: 60%;"><input type="file" id="yoloimage" class="form-control"></td>
+                <td style="width: 25%;">
+                    <!-- type="submit" -->
+                    <button class="btn btn-primary me-1" onclick="send()">업로드</button>
+                    <button class="btn btn-secondary" onclick="option()">옵션</button>
+                </td>
+            </tr>
+        </table>
+    <!-- </form> -->
+    <div class="d-flex justify-content-center" style="margin-bottom: 60px;">
+        <!-- src="{{url_for('static', filename='result/yolo.png', q=mtime)}}" alt="yolo_result" width="100%" 
+        생략 후 ajax 성공시 img src 열게 함.-->
+        <img id="yoloimg">
+    </div>
+{% endblock %}
+{% block additional_body %}
+    <div class="modal" id="optionModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">옵션 선택</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-borderless">
+                        <tr>
+                            <td style="width: 20%">
+                                <label class="col-form-label">박스 컬러</label>
+                            </td>
+                            <td style="width: 80%; text-align: center;">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="color" value="red" checked>
+                                    <label class="form-check-label">빨강</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="color" value="green">
+                                    <label class="form-check-label">초록</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="color" value="blue">
+                                    <label class="form-check-label">파랑</label>
+                                </div>
+                            </td>
+                        </tr>
+                            <td><label class="col-form-label">선 굵기</label></td>
+                            <td><input type="text" class="form-control" id="linewidth" value="1"></td>
+                        <tr>
+                            <td><label class="col-form-label">폰트 크기</label></td>
+                            <td><input type="text" class="form-control" id="fontsize" value="16"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="text-align: center;">
+                                <button class="btn btn-primary" data-bs-dismiss="modal">확인</button> <!-- value값을 서버에 보냄 -->
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

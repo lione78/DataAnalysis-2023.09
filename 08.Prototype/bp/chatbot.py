@@ -3,6 +3,7 @@ import json, os
 import pandas as pd
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
+import util.chatbot_util as cu
 
 chatbot_bp = Blueprint('chatbot_bp', __name__)
 
@@ -58,3 +59,22 @@ def bard():
 @chatbot_bp.route('/genImg', methods=['GET','POST'])
 def gen_img():
     pass
+
+@chatbot_bp.route('/yolo', methods=['GET','POST'])
+def yolo():
+    if request.method == 'GET':
+        return render_template('chatbot/yolo.html', menu=menu)
+    else:
+        color = request.form['color']
+        linewidth = int(request.form['linewidth'])
+        fontsize = int(request.form['fontsize'])
+        file_image = request.files['image']
+        img_file = os.path.join(current_app.static_folder, f'upload/{file_image.filename}')
+        file_image.save(img_file)
+
+        mtime = cu.proc_yolo(current_app.static_folder, img_file, color, linewidth, fontsize)
+
+        return json.dumps(str(mtime))
+
+
+

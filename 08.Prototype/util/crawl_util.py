@@ -1,6 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
 from urllib.parse import quote
+from selenium import webdriver
+from selenium.webdriver.common.by import By
 
 def get_bestseller():
     base_url = 'http://book.interpark.com'
@@ -57,17 +59,38 @@ def get_restaurant_list(place):
     lis = soup.select('.localFood_list > li')
 
     data = []
-    for li in lis:
+    for li in lis[:2]:
         atag = li.select_one('figcaption > a')
         name = atag.select_one('h2').get_text().strip()
         score = atag.select_one('.score').get_text().strip()
         menu = li.select('.cate > a')[-1].get_text().strip()
         sub_href = atag['href']
-        sub_res = requests.get(sub_href)
-        sub_soup = BeautifulSoup(sub_res.text, 'html.parser')
+        driver = webdriver.Chrome()
+        driver.get(sub_href)
+        sub_soup = BeautifulSoup(driver.page_source, 'html.parser')
+        
+        # sub_res = requests.get(sub_href)
+        # sub_soup = BeautifulSoup(sub_res.text, 'html.parser')
+        # 주어진 react-text들을 찾고 그 사이의 텍스트를 크롤링
+        # target_text = sub_soup.find('div', {'class': 'text02', 'data-reactid': '322'}).text.strip().split()
+        # print(target_text)
+
+        # if target_text:
+        #     addr = ''
+        #     for i in range(target_text.index('주소')+2, target_text.index('전화번호')):
+        #         addr += target_text[i]
+
+        #     for k in range(target_text.index('전화번호'), target_text.index('전화번호')+3):
+        #         tel = target_text[k]
+            
+        #     print(addr, tel)
+        # else:
+        #     print('react data가 없습니다.')
         info = sub_soup.select('.pc_only > td')
         addr = info[0].select_one('div').get_text().split('지번')[0].strip()
         tel = info[1].select_one('div').get_text().strip()
+        print(addr, tel)
+        
         data.append({'업소명':name, '평점':score, '메뉴':menu, '주소':addr, '전화번호':tel})
     
     return data
